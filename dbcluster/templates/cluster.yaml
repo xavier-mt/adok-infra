@@ -11,8 +11,8 @@ spec:
 
   bootstrap:
     initdb:
-      database: {{ .Values.super.database | quote }}
-      owner: {{ .Values.super.username | quote }}
+      database: {{ .Values.bootstrap.database | quote }}
+      owner: {{ .Values.bootstrap.username | quote }}
       secret:
         name: {{ .Values.cluster.name }}-creds
 
@@ -21,6 +21,8 @@ spec:
         {{- range .Values.users }}
       - name: {{ .username }}
         login: true
+        superuser: {{ .superuser | default false }}
+        createdb: {{ .createdb | default false }}
         passwordSecret:
           name: {{ .username }}-creds
         {{- end }}

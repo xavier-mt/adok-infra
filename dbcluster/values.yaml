@@ -4,15 +4,28 @@ cluster:
   imageName: ghcr.io/cloudnative-pg/postgresql:16
   storageSize: 1Gi
 
-super:
-  database: super
-  username: superuser
-  password: alpha
+bootstrap:
+  database: bootstrap
+  username: admin
+  password: password
 
 users:
-  - username: adokuser
-    password: adokpw
+  - username: superuser
+    password: password
+    superuser: true
+    createdb: true
+
+#  - username: adokuser
+#    password: password
+#    superuser: false
+#    createdb: true
 
 databases:
-  - name: adok
-    user: adokuser
+  - name: superdb
+    user: superuser
+
+#  - name: adokdb
+#    user: adokuser
+#
+#  - name: adoktestdb
+#    user: adokuser
